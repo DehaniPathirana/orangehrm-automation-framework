@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<!--
+CORRECTED TestNG Configuration - Prevents Race Conditions
+
+KEY FIXES:
+1. Disabled parallel execution to prevent WebDriver session conflicts
+2. Added proper test ordering
+3. Separated Chrome and Firefox tests to run sequentially
+4. Added timeout configurations
+-->
+
+<suite name="OrangeHRM_Test_Suite" parallel="none" thread-count="1" verbose="2">
+
+    <!-- Global timeout settings -->
+    <parameter name="timeout" value="60000"/>
+
+    <!-- Test Listener for Reports -->
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+    </listeners>
+
+    <!-- Chrome Tests - Run First -->
+    <test name="Chrome_Tests" preserve-order="true" enabled="true">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testValidLogin"/>
+                    <include name="testInvalidLogin"/>
+                    <include name="testEmptyFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Firefox Tests - Run After Chrome -->
+    <test name="Firefox_Tests" preserve-order="true" enabled="true">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testValidLogin"/>
+                    <include name="testInvalidLogin"/>
+                    <include name="testEmptyFields"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
