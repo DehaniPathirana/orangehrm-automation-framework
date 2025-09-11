@@ -10,15 +10,7 @@ import org.openqa.selenium.By;
 import base.BaseTest;
 import java.time.Duration;
 
-/**
- * COMPLETE CORRECTED LoginPage Class - Resolves WebDriver Session Issues
- *
- * KEY FIXES:
- * 1. Uses BaseTest.getDriver() for thread-safe driver access
- * 2. Better session validation before operations
- * 3. Improved error handling and recovery
- * 4. More robust element waiting strategies
- */
+
 public class LoginPage {
 
     private WebDriver driver;
@@ -60,9 +52,7 @@ public class LoginPage {
         System.out.println("LoginPage object created and elements initialized");
     }
 
-    /**
-     * ADDED: Validate WebDriver session
-     */
+
     private boolean isDriverSessionValid() {
         try {
             if (driver == null) {
@@ -80,9 +70,7 @@ public class LoginPage {
         }
     }
 
-    /**
-     * FIXED: Enhanced page load waiting with session validation
-     */
+
     private void waitForPageToLoad() {
         try {
             // Validate driver session before waiting
@@ -100,9 +88,6 @@ public class LoginPage {
         }
     }
 
-    /**
-     * FIXED: Enter username with enhanced session validation
-     */
     public void enterUsername(String username) {
         try {
             // Validate session before proceeding
@@ -136,9 +121,7 @@ public class LoginPage {
         }
     }
 
-    /**
-     * FIXED: Enter password with enhanced session validation
-     */
+
     public void enterPassword(String password) {
         try {
             // Validate session before proceeding
@@ -165,9 +148,7 @@ public class LoginPage {
         }
     }
 
-    /**
-     * FIXED: Click login button with enhanced session validation
-     */
+
     public void clickLoginButton() {
         try {
             // Validate session before proceeding
@@ -196,9 +177,7 @@ public class LoginPage {
         }
     }
 
-    /**
-     * Complete login process with enhanced error handling
-     */
+
     public void login(String username, String password) {
         System.out.println("Starting login process...");
         try {
@@ -213,9 +192,7 @@ public class LoginPage {
         }
     }
 
-    /**
-     * FIXED: Get error message with session validation
-     */
+
     public String getErrorMessage() {
         try {
             // Validate session before proceeding
@@ -240,9 +217,7 @@ public class LoginPage {
         }
     }
 
-    /**
-     * FIXED: Check if login page is displayed with session validation
-     */
+
     public boolean isLoginPageDisplayed() {
         try {
             // Validate session before proceeding
@@ -266,9 +241,7 @@ public class LoginPage {
         }
     }
 
-    /**
-     * FIXED: Wait for login result with session validation
-     */
+
     public void waitForLoginResult() {
         try {
             // Validate session before proceeding

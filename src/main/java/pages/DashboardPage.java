@@ -2,35 +2,15 @@ package pages;
 
 
 // IMPORT STATEMENTS
-import org.openqa.selenium.WebDriver;        // Browser controller
-import org.openqa.selenium.WebElement;       // Represents elements on webpage
-import org.openqa.selenium.support.FindBy;  // Annotation to find elements
-import org.openqa.selenium.support.PageFactory;  // Initializes page elements
-
-/**
- * DashboardPage Class - Represents OrangeHRM Dashboard Page
- *
- * PURPOSE:
- * - Contains elements that appear after successful login
- * - Contains actions we can perform on dashboard (logout, navigate, etc.)
- * - Used to verify that login was successful
- *
- * WHEN IS THIS PAGE USED:
- * - After successful login, user lands on Dashboard
- * - We use this page to verify login worked
- * - We use this page to perform post-login actions
- */
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class DashboardPage {
     // DRIVER INSTANCE - This represents the browser
     private WebDriver driver;
 
-    /*
-     * PAGE ELEMENTS - Elements that appear on Dashboard page
-     *
-     * IMPORTANT: These elements only appear AFTER successful login
-     * If login fails, these elements won't be found
-     */
 
     // DASHBOARD HEADER - Shows "Dashboard" text
     @FindBy(xpath = "//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']")
@@ -44,15 +24,7 @@ public class DashboardPage {
     @FindBy(xpath = "//a[text()='Logout']")
     private WebElement logoutLink;  // Logout link
 
-    /**
-     * CONSTRUCTOR - Runs when DashboardPage object is created
-     *
-     * WHAT IT DOES:
-     * 1. Receives WebDriver from test class
-     * 2. Initializes all page elements using PageFactory
-     *
-     * @param driver - The browser instance from test class
-     */
+
     public DashboardPage(WebDriver driver) {
         this.driver = driver;  // Store driver reference
 
@@ -66,16 +38,7 @@ public class DashboardPage {
      * PAGE ACTIONS - Methods that perform actions or checks on dashboard
      */
 
-    /**
-     * Check if Dashboard is Displayed - Main verification method
-     *
-     * PURPOSE: This is the MOST IMPORTANT method in this class
-     * - Used to verify that login was successful
-     * - If dashboard is displayed = login worked
-     * - If dashboard not displayed = login failed
-     *
-     * @return boolean - true if dashboard is displayed, false otherwise
-     */
+
     public boolean isDashboardDisplayed() {
         try {
             // Check if dashboard header is visible and displayed
@@ -96,13 +59,7 @@ public class DashboardPage {
         }
     }
 
-    /**
-     * Get Dashboard Title - Returns the dashboard header text
-     *
-     * USED FOR: Additional verification that we're on correct page
-     *
-     * @return String - The dashboard title text
-     */
+
     public String getDashboardTitle() {
         try {
             String title = dashboardHeader.getText();  // Get header text
@@ -114,15 +71,7 @@ public class DashboardPage {
         }
     }
 
-    /**
-     * Logout - Performs logout action
-     *
-     * HOW IT WORKS:
-     * 1. Click on user dropdown (top-right corner)
-     * 2. Click on "Logout" link
-     *
-     * USED FOR: Ending user session, testing logout functionality
-     */
+
     public void logout() {
         try {
             System.out.println("🚪 Starting logout process...");
@@ -145,13 +94,6 @@ public class DashboardPage {
         }
     }
 
-    /**
-     * Verify User is Logged In - Additional verification method
-     *
-     * PURPOSE: Double-check that user is properly logged in
-     *
-     * @return boolean - true if user appears to be logged in
-     */
     public boolean isUserLoggedIn() {
         try {
             // Check if user dropdown is displayed (means user is logged in)

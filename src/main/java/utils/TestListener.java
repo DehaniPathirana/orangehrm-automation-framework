@@ -6,15 +6,7 @@ import org.testng.ITestContext;
 import utils.ExtentReportManager;
 import com.aventstack.extentreports.Status;
 
-/**
- * CORRECTED TestListener Class - Integrates with ExtentReports
- *
- * FIXES:
- * 1. Added ExtentReports integration
- * 2. Better error handling
- * 3. Enhanced logging and reporting
- * 4. Proper test result tracking
- */
+
 public class TestListener implements ITestListener {
 
     @Override
@@ -151,16 +143,12 @@ public class TestListener implements ITestListener {
         System.out.println("⚠️ TEST FAILED BUT WITHIN SUCCESS PERCENTAGE: " + testName);
     }
 
-    /**
-     * Get Current Timestamp - Utility method
-     */
+
     private String getCurrentTimestamp() {
         return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
     }
 
-    /**
-     * Format Duration - Converts milliseconds to readable format
-     */
+
     private String formatDuration(long durationMs) {
         if (durationMs < 1000) {
             return durationMs + " ms";

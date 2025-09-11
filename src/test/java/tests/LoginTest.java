@@ -8,15 +8,6 @@ import pages.DashboardPage;
 import pages.LoginPage;
 import utils.ExtentReportManager;
 
-/**
- * COMPLETE CORRECTED LoginTest Class - Resolves WebDriver Session Management Issues
- *
- * KEY FIXES:
- * 1. Better error handling and recovery
- * 2. Proper validation of WebDriver sessions
- * 3. Enhanced logging and debugging
- * 4. Improved test flow with proper waits
- */
 public class LoginTest extends BaseTest {
 
     @Test(priority = 1, description = "Test login functionality with valid credentials")
