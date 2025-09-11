@@ -12,9 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import java.time.Duration;
 
-/**
- * FINAL CORRECTED BaseTest Class - Thread-Safe and Robust
- */
+
 public class BaseTest {
 
     private static ThreadLocal<WebDriver> driverThreadLocal = new ThreadLocal<>();
