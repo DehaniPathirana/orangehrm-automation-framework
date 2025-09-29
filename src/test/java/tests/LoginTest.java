@@ -13,7 +13,7 @@ public class LoginTest extends BaseTest {
     @Test(priority = 1, description = "Test login functionality with valid credentials")
     public void testValidLogin() {
 
-        // Create test report entry
+
         ExtentReportManager.setTest(
                 ExtentReportManager.getInstance().createTest(
                         "Valid Login Test",
@@ -25,16 +25,16 @@ public class LoginTest extends BaseTest {
         ExtentReportManager.getTest().log(Status.INFO, "Thread: " + Thread.currentThread().getName());
 
         try {
-            // FIXED: Validate WebDriver before proceeding
+
             if (driver == null) {
                 throw new RuntimeException("WebDriver is null - setup may have failed");
             }
 
-            // Create page objects
+
             LoginPage loginPage = new LoginPage(driver);
             ExtentReportManager.getTest().log(Status.PASS, "Login page loaded successfully");
 
-            // Perform login with valid credentials
+
             String username = "Admin";
             String password = "admin123";
 
@@ -42,14 +42,14 @@ public class LoginTest extends BaseTest {
             loginPage.login(username, password);
             ExtentReportManager.getTest().log(Status.PASS, "Login credentials submitted successfully");
 
-            // Wait for login result
+
             loginPage.waitForLoginResult();
             ExtentReportManager.getTest().log(Status.INFO, "Waiting for login to process...");
 
-            // FIXED: Add additional wait for page transition
+
             Thread.sleep(3000);
 
-            // Create dashboard page and verify login success
+
             DashboardPage dashboardPage = new DashboardPage(driver);
 
             boolean isDashboardDisplayed = dashboardPage.isDashboardDisplayed();
@@ -59,12 +59,12 @@ public class LoginTest extends BaseTest {
                 ExtentReportManager.getTest().log(Status.PASS,
                         "LOGIN SUCCESSFUL - Dashboard displayed with title: " + dashboardTitle);
 
-                // Additional verification
+
                 boolean isUserLoggedIn = dashboardPage.isUserLoggedIn();
                 ExtentReportManager.getTest().log(Status.INFO, "User logged in status: " + isUserLoggedIn);
 
             } else {
-                // Check if there's an error message
+
                 String errorMsg = loginPage.getErrorMessage();
                 if (!errorMsg.isEmpty()) {
                     ExtentReportManager.getTest().log(Status.FAIL,
@@ -75,7 +75,7 @@ public class LoginTest extends BaseTest {
                 }
             }
 
-            // Assert the result
+
             Assert.assertTrue(isDashboardDisplayed,
                     "Dashboard should be displayed after successful login. Check if credentials are correct or if there are network issues.");
 
@@ -83,7 +83,7 @@ public class LoginTest extends BaseTest {
             ExtentReportManager.getTest().log(Status.FAIL,
                     "Test failed due to exception: " + e.getMessage());
 
-            // Add more context to the error
+
             String errorDetails = "Browser: " + System.getProperty("browser", "unknown") +
                     ", Thread: " + Thread.currentThread().getName() +
                     ", Error: " + e.getMessage();
@@ -106,14 +106,14 @@ public class LoginTest extends BaseTest {
         ExtentReportManager.getTest().log(Status.INFO, "Starting invalid login test");
 
         try {
-            // FIXED: Validate WebDriver before proceeding
+
             if (driver == null) {
                 throw new RuntimeException("WebDriver is null - setup may have failed");
             }
 
             LoginPage loginPage = new LoginPage(driver);
 
-            // Attempt login with invalid credentials
+
             String invalidUsername = "InvalidUser";
             String invalidPassword = "WrongPassword123";
 
@@ -123,13 +123,13 @@ public class LoginTest extends BaseTest {
             loginPage.login(invalidUsername, invalidPassword);
             ExtentReportManager.getTest().log(Status.PASS, "Invalid credentials submitted");
 
-            // Wait for login result
+
             loginPage.waitForLoginResult();
 
-            // FIXED: Add wait time for error message to appear
+
             Thread.sleep(2000);
 
-            // Check for error message
+
             String errorMessage = loginPage.getErrorMessage();
             boolean hasErrorMessage = !errorMessage.isEmpty();
 
@@ -141,7 +141,7 @@ public class LoginTest extends BaseTest {
                         "No error message displayed for invalid login");
             }
 
-            // Verify still on login page
+
             boolean isOnLoginPage = loginPage.isLoginPageDisplayed();
 
             if (isOnLoginPage) {
@@ -152,7 +152,7 @@ public class LoginTest extends BaseTest {
                         "User unexpectedly navigated away from login page");
             }
 
-            // FIXED: Modified assertions - either error message OR still on login page is acceptable
+
             boolean testPassed = hasErrorMessage || isOnLoginPage;
 
             if (testPassed) {
@@ -184,7 +184,7 @@ public class LoginTest extends BaseTest {
         ExtentReportManager.getTest().log(Status.INFO, "Starting empty fields test");
 
         try {
-            // FIXED: Validate WebDriver before proceeding
+
             if (driver == null) {
                 throw new RuntimeException("WebDriver is null - setup may have failed");
             }
@@ -194,13 +194,13 @@ public class LoginTest extends BaseTest {
             ExtentReportManager.getTest().log(Status.INFO,
                     "Attempting to login with empty username and password fields");
 
-            // Click login button without entering credentials
+
             loginPage.clickLoginButton();
 
-            // Small wait to see if any validation appears
+
             Thread.sleep(2000);
 
-            // Verify still on login page (validation should prevent login)
+
             boolean isLoginPageDisplayed = loginPage.isLoginPageDisplayed();
 
             if (isLoginPageDisplayed) {
@@ -213,7 +213,7 @@ public class LoginTest extends BaseTest {
                         "SECURITY ISSUE - User was able to proceed with empty credentials");
             }
 
-            // Check for any validation messages
+
             String errorMessage = loginPage.getErrorMessage();
             if (!errorMessage.isEmpty()) {
                 ExtentReportManager.getTest().log(Status.INFO,

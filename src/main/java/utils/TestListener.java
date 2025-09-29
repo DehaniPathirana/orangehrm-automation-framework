@@ -11,11 +11,11 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        // Get test method name
+
         String testName = result.getMethod().getMethodName();
         String className = result.getTestClass().getName();
 
-        // Log test start
+
         System.out.println("\n🚀 TEST STARTED: " + testName);
         System.out.println("📋 Class: " + className);
         System.out.println("⏰ Start Time: " + new java.util.Date());
@@ -24,16 +24,16 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        // Get test information
+
         String testName = result.getMethod().getMethodName();
         long executionTime = result.getEndMillis() - result.getStartMillis();
 
-        // Log success
+
         System.out.println("✅ TEST PASSED: " + testName);
         System.out.println("⏱️ Execution Time: " + executionTime + " ms");
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
-        // Update ExtentReports if test exists
+
         try {
             if (ExtentReportManager.getTest() != null) {
                 ExtentReportManager.getTest().log(Status.PASS,
@@ -46,25 +46,25 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult result) {
-        // Get test information
+
         String testName = result.getMethod().getMethodName();
         String errorMessage = result.getThrowable() != null ?
                 result.getThrowable().getMessage() : "Unknown error";
         long executionTime = result.getEndMillis() - result.getStartMillis();
 
-        // Log failure
+
         System.out.println("❌ TEST FAILED: " + testName);
         System.out.println("💥 Error: " + errorMessage);
         System.out.println("⏱️ Execution Time: " + executionTime + " ms");
 
-        // Print stack trace for debugging
+
         System.out.println("📍 Stack Trace:");
         if (result.getThrowable() != null) {
             result.getThrowable().printStackTrace();
         }
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
-        // Update ExtentReports if test exists
+
         try {
             if (ExtentReportManager.getTest() != null) {
                 ExtentReportManager.getTest().log(Status.FAIL,
@@ -79,17 +79,17 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        // Get test information
+
         String testName = result.getMethod().getMethodName();
         String skipReason = result.getThrowable() != null ?
                 result.getThrowable().getMessage() : "No reason provided";
 
-        // Log skip
+
         System.out.println("⏭️ TEST SKIPPED: " + testName);
         System.out.println("📝 Reason: " + skipReason);
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
-        // Update ExtentReports if test exists
+
         try {
             if (ExtentReportManager.getTest() != null) {
                 ExtentReportManager.getTest().log(Status.SKIP,
@@ -102,16 +102,16 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext context) {
-        // Get test execution summary
+
         int totalTests = context.getAllTestMethods().length;
         int passedTests = context.getPassedTests().size();
         int failedTests = context.getFailedTests().size();
         int skippedTests = context.getSkippedTests().size();
 
-        // Calculate pass percentage
+
         double passPercentage = totalTests > 0 ? (double) passedTests / totalTests * 100 : 0;
 
-        // Print summary
+
         System.out.println("\n🏁 TEST EXECUTION COMPLETED");
         System.out.println("═══════════════════════════════════════════");
         System.out.println("📊 TEST SUMMARY:");
@@ -122,7 +122,7 @@ public class TestListener implements ITestListener {
         System.out.println("   📈 Pass Rate: " + String.format("%.2f", passPercentage) + "%");
         System.out.println("═══════════════════════════════════════════");
 
-        // CRITICAL: Generate ExtentReports
+
         try {
             ExtentReportManager.flushReports();
             System.out.println("📑 ExtentReports generated successfully!");
@@ -138,7 +138,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-        // Handle tests that failed but are within success percentage
+
         String testName = result.getMethod().getMethodName();
         System.out.println("⚠️ TEST FAILED BUT WITHIN SUCCESS PERCENTAGE: " + testName);
     }
