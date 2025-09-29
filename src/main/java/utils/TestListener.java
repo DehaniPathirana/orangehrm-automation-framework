@@ -16,9 +16,9 @@ public class TestListener implements ITestListener {
         String className = result.getTestClass().getName();
 
 
-        System.out.println("\n🚀 TEST STARTED: " + testName);
-        System.out.println("📋 Class: " + className);
-        System.out.println("⏰ Start Time: " + new java.util.Date());
+        System.out.println("TEST STARTED: " + testName);
+        System.out.println("Class: " + className);
+        System.out.println("Start Time: " + new java.util.Date());
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
@@ -29,8 +29,8 @@ public class TestListener implements ITestListener {
         long executionTime = result.getEndMillis() - result.getStartMillis();
 
 
-        System.out.println("✅ TEST PASSED: " + testName);
-        System.out.println("⏱️ Execution Time: " + executionTime + " ms");
+        System.out.println("TEST PASSED: " + testName);
+        System.out.println("Execution Time: " + executionTime + " ms");
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
 
@@ -53,16 +53,16 @@ public class TestListener implements ITestListener {
         long executionTime = result.getEndMillis() - result.getStartMillis();
 
 
-        System.out.println("❌ TEST FAILED: " + testName);
-        System.out.println("💥 Error: " + errorMessage);
-        System.out.println("⏱️ Execution Time: " + executionTime + " ms");
+        System.out.println("TEST FAILED: " + testName);
+        System.out.println("Error: " + errorMessage);
+        System.out.println("Execution Time: " + executionTime + " ms");
 
 
-        System.out.println("📍 Stack Trace:");
+        System.out.println("Stack Trace:");
         if (result.getThrowable() != null) {
             result.getThrowable().printStackTrace();
         }
-        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+        System.out.println("-----------------------------------\n");
 
 
         try {
@@ -85,9 +85,9 @@ public class TestListener implements ITestListener {
                 result.getThrowable().getMessage() : "No reason provided";
 
 
-        System.out.println("⏭️ TEST SKIPPED: " + testName);
-        System.out.println("📝 Reason: " + skipReason);
-        System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+        System.out.println("TEST SKIPPED: " + testName);
+        System.out.println("Reason: " + skipReason);
+        System.out.println("---------------------------------\n");
 
 
         try {
@@ -113,34 +113,34 @@ public class TestListener implements ITestListener {
 
 
         System.out.println("\n🏁 TEST EXECUTION COMPLETED");
-        System.out.println("═══════════════════════════════════════════");
-        System.out.println("📊 TEST SUMMARY:");
+        System.out.println("----------------------------------------");
+        System.out.println("TEST SUMMARY:");
         System.out.println("   Total Tests: " + totalTests);
-        System.out.println("   ✅ Passed: " + passedTests);
-        System.out.println("   ❌ Failed: " + failedTests);
-        System.out.println("   ⏭️ Skipped: " + skippedTests);
-        System.out.println("   📈 Pass Rate: " + String.format("%.2f", passPercentage) + "%");
-        System.out.println("═══════════════════════════════════════════");
+        System.out.println("   Passed: " + passedTests);
+        System.out.println("   Failed: " + failedTests);
+        System.out.println("   Skipped: " + skippedTests);
+        System.out.println("   Pass Rate: " + String.format("%.2f", passPercentage) + "%");
+        System.out.println("-----------------------------------------");
 
 
         try {
             ExtentReportManager.flushReports();
-            System.out.println("📑 ExtentReports generated successfully!");
-            System.out.println("📂 Report Location: test-reports/ExtentReport.html");
-            System.out.println("🌐 Open this file in your browser to view results");
+            System.out.println("ExtentReports generated successfully!");
+            System.out.println("Report Location: test-reports/ExtentReport.html");
+            System.out.println("Open this file in your browser to view results");
         } catch (Exception e) {
-            System.err.println("❌ Error generating ExtentReports: " + e.getMessage());
+            System.err.println("Error generating ExtentReports: " + e.getMessage());
             e.printStackTrace();
         }
 
-        System.out.println("\n🎉 All tests completed!\\n");
+        System.out.println("\nAll tests completed!\\n");
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 
         String testName = result.getMethod().getMethodName();
-        System.out.println("⚠️ TEST FAILED BUT WITHIN SUCCESS PERCENTAGE: " + testName);
+        System.out.println("TEST FAILED BUT WITHIN SUCCESS PERCENTAGE: " + testName);
     }
 
 

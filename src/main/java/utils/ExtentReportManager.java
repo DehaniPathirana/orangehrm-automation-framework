@@ -1,6 +1,5 @@
 package utils;
 
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
@@ -50,13 +49,13 @@ public class ExtentReportManager {
         extent.setSystemInfo("Operating System", System.getProperty("os.name"));
         extent.setSystemInfo("Java Version", System.getProperty("java.version"));
 
-        System.out.println("⚙️  Report configuration completed");
+        System.out.println("Report configuration completed");
     }
 
 
     public static void setTest(ExtentTest test) {
         extentTest.set(test);
-        System.out.println("📝 Test registered with report: " + test.getModel().getName());
+        System.out.println("Test registered with report: " + test.getModel().getName());
     }
 
 
@@ -68,7 +67,7 @@ public class ExtentReportManager {
             return currentTest;
         } else {
 
-            System.out.println("⚠️  Warning: No test set in current thread");
+            System.out.println("Warning: No test set in current thread");
             return null;
         }
     }
@@ -78,16 +77,16 @@ public class ExtentReportManager {
 
         if (extent != null) {
             extent.flush();
-            System.out.println("✅ Reports flushed successfully - Check test-reports/ExtentReport.html");
+            System.out.println("Reports flushed successfully - Check test-reports/ExtentReport.html");
         } else {
-            System.out.println("⚠️  Warning: No report instance to flush");
+            System.out.println("Warning: No report instance to flush");
         }
     }
 
 
     public static void removeTest() {
         extentTest.remove();
-        System.out.println("🧹 Test removed from ThreadLocal");
+        System.out.println("Test removed from ThreadLocal");
     }
 }
 
